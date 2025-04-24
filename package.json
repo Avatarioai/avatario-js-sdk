@@ -1,0 +1,44 @@
+{
+  "name": "avatario-js-sdk",
+  "version": "0.1.3",
+  "description": "JavaScript SDK for integrating Avatario video avatars",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "livekit-client": "^1.15.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "avatario",
+    "livekit",
+    "video",
+    "avatar",
+    "sdk"
+  ],
+  "author": "Avatario",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Listen2It/onezot-monorepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Listen2It/onezot-monorepo/issues"
+  },
+  "homepage": "https://github.com/Listen2It/onezot-monorepo#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+} 
