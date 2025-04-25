@@ -1,5 +1,5 @@
 {
-  "name": "avatario-js-sdk",
+  "name": "@avatario/avatario-js-sdk",
   "version": "0.1.3",
   "description": "JavaScript SDK for integrating Avatario video avatars",
   "main": "dist/index.js",
@@ -32,12 +32,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Listen2It/onezot-monorepo.git"
+    "url": "git+https://github.com/Avatarioai/avatario-js-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/Listen2It/onezot-monorepo/issues"
+    "url": "https://github.com/Avatarioai/avatario-js-sdk/issues"
   },
-  "homepage": "https://github.com/Listen2It/onezot-monorepo#readme",
+  "homepage": "https://github.com/Avatarioai/avatario-js-sdk#readme",
   "publishConfig": {
     "access": "public"
   }
