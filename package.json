@@ -1,6 +1,6 @@
 {
   "name": "@avatario/avatario-js-sdk",
-  "version": "0.1.3",
+  "version": "0.1.8",
   "description": "JavaScript SDK for integrating Avatario video avatars",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

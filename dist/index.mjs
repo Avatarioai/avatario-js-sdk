@@ -2,13 +2,13 @@ var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
-// src/OneZotSDK.ts
+// src/AvatarioClient.ts
 import { Room, RoomEvent } from "livekit-client";
-var BASE_URL = "https://app.onezot.work/api/sdk";
-var LOCAL_IDENTITY = "onezot-client";
-var OneZotSDK = class {
+var BASE_URL = "http://localhost:3000/api/sdk";
+var LOCAL_IDENTITY = "avatario-client";
+var AvatarioClient = class {
   constructor(options) {
-    __publicField(this, "onezotRoom", null);
+    __publicField(this, "avatarioRoom", null);
     __publicField(this, "options");
     __publicField(this, "isConnected", false);
     __publicField(this, "runpodInvoked", false);
@@ -34,18 +34,18 @@ var OneZotSDK = class {
       "ngrok-skip-browser-warning": "69420"
     };
   }
-  async getOnezotToken(onezotRoomName) {
+  async getAvatarioToken(avatarioRoomName) {
     try {
       const response = await fetch(`${BASE_URL}/get-token-onezot`, {
         method: "POST",
         headers: this.getHeaders(),
         body: JSON.stringify({
           local_identity: LOCAL_IDENTITY,
-          room_name: onezotRoomName
+          room_name: avatarioRoomName
         })
       });
       if (!response.ok) {
-        throw new Error("Failed to get OneZot token");
+        throw new Error("Failed to get Avatario token");
       }
       return await response.json();
     } catch (error) {
@@ -53,14 +53,14 @@ var OneZotSDK = class {
       throw error;
     }
   }
-  async invokeRunPod(onezotRoomName) {
+  async invokeRunPod(avatarioRoomName) {
     try {
       const response = await fetch(`${BASE_URL}/invoke-runpod`, {
         method: "POST",
         headers: this.getHeaders(),
         body: JSON.stringify({
           local_identity: LOCAL_IDENTITY,
-          room_name: onezotRoomName,
+          room_name: avatarioRoomName,
           audio_sample_rate: 24e3,
           video_frame_width: 1920,
           video_frame_height: 1080,
@@ -79,19 +79,19 @@ var OneZotSDK = class {
   }
   async connect(videoElement, audioElement) {
     try {
-      const onezotRoomName = `onezot-${this.generateUUID()}`;
-      const onezotTokenResponse = await this.getOnezotToken(onezotRoomName);
-      const onezotRoom = new Room({
+      const avatarioRoomName = `avatario-${this.generateUUID()}`;
+      const avatarioTokenResponse = await this.getAvatarioToken(avatarioRoomName);
+      const avatarioRoom = new Room({
         adaptiveStream: true,
         dynacast: true
       });
-      onezotRoom.on(RoomEvent.Connected, () => {
-        console.log("Connected to OneZot room");
+      avatarioRoom.on(RoomEvent.Connected, () => {
+        console.log("Connected to Avatario room");
         if (!this.runpodInvoked) {
-          this.invokeRunPod(onezotRoomName).catch(console.error);
+          this.invokeRunPod(avatarioRoomName).catch(console.error);
         }
       }).on(RoomEvent.Disconnected, () => {
-        console.log("Disconnected from OneZot room");
+        console.log("Disconnected from Avatario room");
       }).on(RoomEvent.TrackSubscribed, (track, _publication, participant) => {
         console.log(
           "Track subscribed:",
@@ -106,15 +106,15 @@ var OneZotSDK = class {
           track.attach(audioElement);
         }
       });
-      await onezotRoom.connect(
-        onezotTokenResponse.url,
-        onezotTokenResponse.token
+      await avatarioRoom.connect(
+        avatarioTokenResponse.url,
+        avatarioTokenResponse.token
       );
-      this.onezotRoom = onezotRoom;
+      this.avatarioRoom = avatarioRoom;
       this.isConnected = true;
       this.options.onConnected?.();
       return {
-        onezotRoomName
+        avatarioRoomName
       };
     } catch (error) {
       this.options.onError?.(error);
@@ -122,9 +122,9 @@ var OneZotSDK = class {
     }
   }
   async disconnect() {
-    if (this.onezotRoom) {
-      await this.onezotRoom.disconnect();
-      this.onezotRoom = null;
+    if (this.avatarioRoom) {
+      await this.avatarioRoom.disconnect();
+      this.avatarioRoom = null;
     }
     this.isConnected = false;
     this.runpodInvoked = false;
@@ -138,5 +138,5 @@ var OneZotSDK = class {
   }
 };
 export {
-  OneZotSDK
+  AvatarioClient
 };

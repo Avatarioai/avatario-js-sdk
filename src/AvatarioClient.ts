@@ -1,7 +1,7 @@
 import { Room, RoomEvent } from "livekit-client";
 
-const BASE_URL = "https://app.avatario.work/api/sdk";
-//   "https://uu4rvj3echoqgzz7lxmbnukkmy0yblql.lambda-url.us-east-1.on.aws";
+// const BASE_URL = "http://localhost:3000/api/sdk";
+const BASE_URL = "https://app.onezot.work/api/sdk";
 
 const LOCAL_IDENTITY = "avatario-client";
 
@@ -47,7 +47,7 @@ export class AvatarioClient {
 
   private async getAvatarioToken(avatarioRoomName: string) {
     try {
-      const response = await fetch(`${BASE_URL}/get-token-avatario`, {
+      const response = await fetch(`${BASE_URL}/get-token-onezot`, {
         method: "POST",
         headers: this.getHeaders(),
         body: JSON.stringify({

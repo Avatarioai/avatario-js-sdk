@@ -1,26 +1,26 @@
-interface OneZotSDKOptions {
+interface AvatarioClientOptions {
     apiKey: string;
     avatarId: string;
     onConnected?: () => void;
     onDisconnected?: () => void;
     onError?: (error: Error) => void;
 }
-declare class OneZotSDK {
-    private onezotRoom;
+declare class AvatarioClient {
+    private avatarioRoom;
     private options;
     private isConnected;
     private runpodInvoked;
-    constructor(options: OneZotSDKOptions);
+    constructor(options: AvatarioClientOptions);
     private generateUUID;
     private getHeaders;
-    private getOnezotToken;
+    private getAvatarioToken;
     private invokeRunPod;
     connect(videoElement?: HTMLVideoElement | undefined, audioElement?: HTMLAudioElement | undefined): Promise<{
-        onezotRoomName: string;
+        avatarioRoomName: string;
     }>;
     disconnect(): Promise<void>;
     isConnectedToRoom(): boolean;
     getAvatarId(): string;
 }
 
-export { OneZotSDK, type OneZotSDKOptions };
+export { AvatarioClient, type AvatarioClientOptions };
